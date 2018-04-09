@@ -1,0 +1,12 @@
+﻿<section id="screenshots">
+    <div class="section-title">
+        <h4>截图</h4>
+    </div>
+    {% if results.sandbox_result.screenshots %}
+        {% for shot in results.sandbox_result.screenshots %}
+            <a href="data:image/jpeg;base64,{{shot.data}}"><img class="fade" src="data:image/jpeg;base64,{{shot.data}}" height="100px" width="150px" /></a>
+        {% endfor %}
+    {% else %}
+        <div class="nothing">没有内容.</div>
+    {% endif %}
+</section>

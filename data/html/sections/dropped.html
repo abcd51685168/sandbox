@@ -1,0 +1,67 @@
+﻿<section id="dropped">
+    <div class="section-title">
+        <h4>释放文件</h4>
+    </div>
+    {% if results.sandbox_result.dropped %}
+        {% set counter = 1 %}
+        {% for dropped_file in results.sandbox_result.dropped %}
+            <div>
+                {% if summary_report %}
+                <h4>{{dropped_file.name}}</h4>
+                <div id="dropped_{{counter}}">
+                {% else %}
+                <h4><a href="javascript:showHide('dropped_{{counter}}');">{{dropped_file.name}}</a></h4>
+                <div id="dropped_{{counter}}" style="display: none;">
+                {% endif %}
+                    <table class="table table-bordered" style="table-layout: fixed;">
+                        <tr>
+                            <th class="tableth" style="text-align: center; width: 15%;">文件名称</th>
+                            <td class="tabletd" style="word-wrap: break-word;"><span>{{dropped_file.name}}</span></td>
+                        </tr>
+                        <tr>
+                            <th class="tableth" style="text-align: center; width: 15%;">文件路径</th>
+                            <td style="word-wrap: break-word;">
+                                <ul style="margin-top: 0;margin-bottom: 0;">
+                                    {% for path in dropped_file.guest_paths %}
+                                    <li>{{path}}</li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="tableth" style="text-align: center; width: 15%;">文件大小</th>
+                            <td class="tabletd"><span>{{dropped_file.size}} bytes</span></td>
+                        </tr>
+                        <tr>
+                            <th class="tableth" style="text-align: center; width: 15%;">文件类型</th>
+                            <td style="word-wrap: break-word;"><span>{{dropped_file.type}}</span></td>
+                        </tr>
+                        <tr>
+                            <th class="tableth" style="text-align: center; width: 15%;">MD5</th>
+                            <td class="tabletd" style="word-wrap: break-word;"><span>{{dropped_file.md5}}</span></td>
+                        </tr>
+                        <tr>
+                            <th class="tableth" style="text-align: center; width: 15%;">SHA1</th>
+                            <td style="word-wrap: break-word;"><span>{{dropped_file.sha1}}</span></td>
+                        </tr>
+                        <tr>
+                            <th class="tableth" style="text-align: center; width: 15%;">SHA256</th>
+                            <td class="tabletd" style="word-wrap: break-word;"><span>{{dropped_file.sha256}}</span></td>
+                        </tr>
+                        <tr>
+                            <th class="tableth" style="text-align: center; width: 15%;">SHA512</th>
+                            <td style="word-wrap: break-word;"><span>{{dropped_file.sha512}}</span></td>
+                        </tr>
+                        <tr>
+                            <th class="tableth" style="text-align: center; width: 15%;">Ssdeep</th>
+                            <td class="tabletd" style="word-wrap: break-word;"><span>{{dropped_file.ssdeep}}</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            {% set counter = counter + 1 %}
+        {% endfor %}
+    {% else %}
+        没有内容.
+    {% endif %}
+</section>

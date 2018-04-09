@@ -1,0 +1,63 @@
+﻿<section id="file">
+    <div class="section-title">
+        <h4>文件详情</h4>
+    </div>
+    <table class="table table-bordered" style="table-layout: fixed;">
+        {% if results.sandbox_result.target %}
+            <tr>
+                <th  class="tableth" style="text-align: center; width: 15%;">文件名称</th>
+                <td class="tabletd"><span  style="word-wrap: break-word;">{{results.sandbox_result.target.file.name}}</span></td>
+            </tr>
+            <tr>
+                <th  class="tableth" style="text-align: center;">文件大小</th>
+                <td><span >{{results.sandbox_result.target.file.size}} bytes</span></td>
+            </tr>
+            <tr>
+                <th class="tableth" style="text-align: center;">文件类型</th>
+                <td class="tabletd"><span  style="word-wrap: break-word;">{{results.sandbox_result.target.file.type}}</span></td>
+            </tr>
+            <tr>
+                <th class="tableth" style="text-align: center;">CRC32</th>
+                <td><span >{{results.sandbox_result.target.file.crc32}}</span></td>
+            </tr>
+            <tr>
+                <th class="tableth" style="text-align: center;">MD5</th>
+                <td class="tabletd"><span  style="word-wrap: break-word;">{{results.sandbox_result.target.file.md5}}</span></td>
+            </tr>
+            <tr>
+                <th class="tableth" style="text-align: center;">SHA1</th>
+                <td><span  style="word-wrap: break-word;">{{results.sandbox_result.target.file.sha1}}</span></td>
+            </tr>
+            <tr>
+                <th class="tableth" style="text-align: center;">SHA256</th>
+                <td class="tabletd"><span  style="word-wrap: break-word;">{{results.sandbox_result.target.file.sha256}}</span></td>
+            </tr>
+            <tr>
+                <th class="tableth" style="text-align: center;">SHA512</th>
+                <td><span  style="word-wrap: break-word;">{{results.sandbox_result.target.file.sha512}}</span></td>
+            </tr>
+            <tr>
+                <th class="tableth" style="text-align: center;">Ssdeep</th>
+                <td class="tabletd"><span  style="word-wrap: break-word;">{{results.sandbox_result.target.file.ssdeep}}</span></td>
+            </tr>
+            <tr>
+                <th class="tableth" style="text-align: center;">PEiD</th>
+                <td>
+                    {% if results.sandbox_result.static and results.sandbox_result.static.peid_signatures %}
+                        {% if results.sandbox_result.static.peid_signatures|length == 0 %}
+                            None matched
+                        {% else %}
+                            <ul style="margin-top: 0;margin-bottom: 0;">
+                            {% for sign in results.sandbox_result.static.peid_signatures %}
+                                <li>{{sign}}</li>
+                            {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% else %}
+                        None matched
+                    {% endif %}
+                </td>
+            </tr>
+        {% endif %}
+    </table>
+</section>

@@ -1,0 +1,80 @@
+﻿<style>
+	.navbar-custom {
+    background-color:#00a0e4;
+    color:red;
+    border-radius:0;
+}
+
+.navbar-custom .navbar-nav > li > a {
+    color:red;
+}
+.navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
+    color: red;
+    background-color:red;
+}
+.navbar-custom .navbar-brand {
+    color:red;
+}
+
+
+.navbar-default {
+    background-color: #00a0e4;
+    border-color: #E7E7E7;
+    color:white;
+}
+/* mobile version */
+.navbar-default .navbar-toggle {
+    border-color: white;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: white;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: white;
+}
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: white;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: white;
+    }
+}
+
+.navbar-nav li a{
+    color: #fff;
+    font-size: 15px;
+    margin-top: 9px;
+}
+.navbar-nav li a:hover{
+
+    background-color: #18678E;
+    height: 61px;
+}
+</style>
+<div class="navbar navbar-default" style="margin-top: 10px;">
+  <div class="navbar-header">
+      <div class="container-fluid">
+          <div class="nav-collapse">
+              <ul class="nav">
+                  <li><a href="#ainfo" style="color:white;">信息</a></li>
+                  {% if (results.sandbox_result.info.category == "file") %}
+												<li><a href="#file" style="color:white;">文件</a></li>
+                  {% elif (results.sandbox_result.info.category == "url") %}
+                  <li><a href="#url" style="color:white;">链接</a></li>
+                  {% endif %}
+                  <li><a href="#signatures" style="color:white;">特征</a></li>
+                  <li><a href="#screenshots" style="color:white;">截图</a></li>
+                  {% if (results.sandbox_result.info.category == "file") %}
+                  <li><a href="#static" style="color:white;">静态分析</a></li>                      
+                  {% endif %}
+                  <li><a href="#dropped" style="color:white;">释放文件</a></li>
+                  <li><a href="#network" style="color:white;">网络分析</a></li>
+                  <li><a href="#behavior" style="color:white;">行为分析</a></li>
+              </ul>
+          </div>
+      </div>
+  </div>
+</div>

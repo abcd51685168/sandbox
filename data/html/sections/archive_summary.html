@@ -1,0 +1,229 @@
+﻿<section id="details">
+    <div class="section-title logoback">
+        <h4>威胁检测</h4>
+    </div>
+    <table class="table table-striped table-bordered" style="table-layout: fixed;">   
+    	<thead>  
+				<tr>
+            <th class="tableth"  style="text-align: center; "></th>
+            <th class="tableth"  style="text-align: center; ">杀毒引擎</th>
+            <th class="tableth"  style="text-align: center; ">Yara规则</th>
+            <th class="tableth"  style="text-align: center; ">JS漏洞检测</th>
+            <th class="tableth"  style="text-align: center; ">Hash值校验</th>
+            <th class="tableth"  style="text-align: center; ">行为分析</th>
+            <th class="tableth"  style="text-align: center; ">总评</th>
+        </tr> 
+       <thead>
+       <tbody>
+        <tr>
+            <td  style="text-align: center; ">威胁名称</th>
+            <td style="text-align: center; ">
+            		{% if results.summary.avengine %}
+	            		{% for avengineobj in results.details.avengine %}
+	            				{% if loop.index != loop.length %}
+		            				{{avengineobj.category_cn}};
+		            			{% else %}
+				            		{{avengineobj.category_cn}}
+		            			{% endif %}
+	              	{% endfor %}
+	              {% else %}
+	            				-
+	            	{% endif %}
+            </td>
+            <td style="text-align: center; ">
+            		{% if results.summary.yara %}
+	            		{% for yaraobj in results.details.yara %}
+	            				{% if loop.index != loop.length %}
+		            				{{yaraobj.category_cn}};
+		            			{% else %}
+				            		{{yaraobj.category_cn}}
+		            			{% endif %}
+	              	{% endfor %}
+	              {% else %}
+	            				-
+	            	{% endif %}
+            </td>
+            <td style="text-align: center; ">
+            		{% if results.summary.jsunpack %}
+	            		{% for jsunpackobj in results.details.jsunpack %}
+	            				{% if loop.index != loop.length %}
+		            				{{jsunpackobj.category_cn}};
+		            			{% else %}
+				            		{{jsunpackobj.category_cn}}
+		            			{% endif %}  
+	              	{% endfor %}
+	              {% else %}
+	            				-
+	            	{% endif %}
+            </td>
+            <td style="text-align: center; ">
+            		{% if results.summary.md5 %}
+	            		{% for md5obj in results.details.md5 %}
+	            				{% if loop.index != loop.length %}
+		            				{{md5obj.category_cn}};
+		            			{% else %}
+				            		{{md5obj.category_cn}}
+		            			{% endif %}  
+	              	{% endfor %}
+	              {% else %}
+	            				-
+	            	{% endif %}
+            </td>
+            <td style="text-align: center; ">
+            		{% if results.summary.sandbox %}
+	            		{% set category_var = [] %}
+	            		{% for sandboxobj in results.details.sandbox %}
+	            			{% if sandboxobj.category_cn not in category_var %}
+	            				{{ category_var.append(sandboxobj.category_cn) if category_var.append(sandboxobj.category_cn) != None }}
+			            		{% if loop.first %}
+		            				{{sandboxobj.category_cn}}
+		            			{% else %}
+				            		;{{sandboxobj.category_cn}}
+		            			{% endif %}  
+	            			{% endif %} 											 
+	              	{% endfor %}
+	              {% else %}
+	            				-
+	            	{% endif %}
+            </td>
+            <td style="text-align: center; ">
+            	-
+            </td>
+        </tr>
+        
+        <tr>
+            <td style="text-align: center; ">风险等级</th>
+            <td style="text-align: center; ">
+            	{% if results.summary.avengine %}
+                {% if results.summary.avengine.severity == 0 %}
+                	安全
+                {% elif results.summary.avengine.severity == 1 %}
+                	低
+                {% elif results.summary.avengine.severity == 2 %}
+                	中
+                {% elif results.summary.avengine.severity == 3 %}
+                	高
+                {% endif %}
+              {% else %}
+	            		-
+	            {% endif %}
+            </td>
+            <td style="text-align: center; ">
+            	{% if results.summary.yara %}
+            		{% if results.summary.yara.severity == 0 %}
+                	安全
+                {% elif results.summary.yara.severity == 1 %}
+                	低
+                {% elif results.summary.yara.severity == 2 %}
+                	中
+                {% elif results.summary.yara.severity == 3 %}
+                	高
+                {% endif %}
+               {% else %}
+	            		-
+	            {% endif %}
+            </td>
+            <td style="text-align: center; ">
+            		{% if results.summary.jsunpack %}
+            			{% if results.summary.jsunpack.severity == 0 %}
+	                	安全
+	                {% elif results.summary.jsunpack.severity == 1 %}
+	                	低
+	                {% elif results.summary.jsunpack.severity == 2 %}
+	                	中
+	                {% elif results.summary.jsunpack.severity == 3 %}
+	                	高
+	                {% endif %}
+            		{% else %}
+            			-
+            		{% endif %}
+            </td>
+            <td style="text-align: center; ">
+            	{% if results.summary.md5 %}
+            		{% if results.summary.md5.severity == 0 %}
+                	安全
+                {% elif results.summary.md5.severity == 1 %}
+                	低
+                {% elif results.summary.md5.severity == 2 %}
+                	中
+                {% elif results.summary.md5.severity == 3 %}
+                	高
+                {% endif %}
+               {% else %}
+            			-
+            	 {% endif %}
+            </td>
+            <td style="text-align: center; ">
+            	{% if results.summary.sandbox %}
+            		{% if results.summary.sandbox.severity == 0 %}
+                	安全
+                {% elif results.summary.sandbox.severity == 1 %}
+                	低
+                {% elif results.summary.sandbox.severity == 2 %}
+                	中
+                {% elif results.summary.sandbox.severity == 3 %}
+                	高
+                {% endif %}
+             {% else %}
+          			-
+          	 {% endif %}
+            </td>
+            <td style="text-align: center; ">
+                {% if results.severity == 0 %}
+                	安全
+                {% elif results.severity == 1 %}
+                	低
+                {% elif results.severity == 2 %}
+                	中
+                {% elif results.severity == 3 %}
+                	高
+                {% elif results.severity == 4 %}
+                	极高
+                {% endif %}
+            </td>
+        </tr>
+        
+        <tr>
+            <td  style="text-align: center; ">评分</th>
+            <td style="text-align: center; ">
+            	{% if results.summary.avengine %}
+            		{{ results.summary.avengine.scores }}
+            	{% else %}
+          			-
+          	  {% endif %}
+            </td>
+            <td style="text-align: center; ">
+            		{% if results.summary.yara %}
+	            		{{ results.summary.yara.scores }}
+	            	{% else %}
+	          			-
+	          	  {% endif %}
+            </td>
+            <td style="text-align: center; ">
+            		{% if results.summary.jsunpack %}
+            			{{ results.summary.jsunpack.scores }}
+            		{% else %}
+            			-
+            		{% endif %}
+            </td>
+            <td style="text-align: center; ">
+            	{% if results.summary.md5 %}
+            		{{ results.summary.md5.scores }}
+            	{% else %}
+            			-
+            	{% endif %}
+            </td>
+            <td style="text-align: center; ">
+            	{% if results.summary.sandbox %}
+            		{{ results.summary.sandbox.scores }}
+            	{% else %}
+            			-
+            	{% endif %}	
+            </td>
+            <td style="text-align: center; ">
+            	 {{ results.scores }}
+            </td>
+        </tr>
+       </tbody>
+    </table>
+</section>

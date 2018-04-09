@@ -1,0 +1,136 @@
+﻿<!--
+  Polydata - Automated Malware Analysis
+  Copyright (C) 2010-2015 Polydata Foundation.
+  http://www.Polydatasandbox.org
+ 
+  This file is part of Polydata.
+ 
+  Polydata is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+ 
+  Polydata is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+ 
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see http://www.gnu.org/licenses/
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Polydata</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<style>
+{% include "css/bootstrap.min.css" %}
+{% include "css/bootstrap-responsive.min.css" %}
+body {
+    margin-top: 20px;
+}
+@page {
+    size: A3;
+    margin: 1cm;
+}
+.footer {
+    margin-top: 45px;
+    padding: 35px 0 36px;
+    border-top: 1px solid #e5e5e5;
+}
+.footer p {
+    margin-bottom: 0;
+    color: #555;
+}
+.mono {
+    font-family: monospace;
+}
+.signature {
+    padding: 6px;
+    margin-bottom: 3px;
+}
+img.fade {
+    opacity:0.4;
+    filter:alpha(opacity=40);
+}
+img.fade:hover {
+    opacity:1.0;
+    filter:alpha(opacity=100);
+}
+.section-title {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 15px;
+    margin-top: 20px;
+    padding-bottom: 3px;
+}
+.filesystem {
+    background-color: #ffe3c5; {# Light Orange #}
+}
+.registry {
+    background-color: #ffc5c5; {# Light Red #}
+}
+.process {
+    background-color: #c5e0ff; {# Light Blue #}
+}
+.services {
+    background-color: #ccc5ff;
+}
+.device {
+    background-color: #ccc5ff;
+}
+.network {
+    background-color: #d3ffc5; {# Light Green #}
+}
+.socket {
+    background-color: #d3ffc5;
+}
+.synchronization {
+    background-color: #f9c5ff;
+}
+
+.tableth {
+	background-color: #a8c3cf;
+	color: white;
+}
+.tabletd {
+	background-color: #e6f5ff;
+}
+.fontcolor {
+	color: #5e5e5d;
+}
+
+.nothing {
+	background-color: #e6f5ff;
+	height: 30px;
+	margin-top: 10px;
+	line-height: 30px;
+	font-size: 16px;
+}
+.StringBlock {
+	background-color: #e6f5ff;
+}
+</style>
+</head>
+<body>
+<div class="container-fluid" style="margin:0px 0px auto 0px;">
+		<div style="height: 100px;background: #1789ca url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAABhCAIAAACcdoy5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3FpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NDkxMSwgMjAxMy8xMC8yOS0xMTo0NzoxNiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo5YThhNjQ2Yi1iZTJkLTU3NGUtOWJlZi1hMGQ4NDdiODM3NDkiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MDdGQTgzOEY3OTVDMTFFNUEwN0VDRTIzQUIzRDBCQkQiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MDdGQTgzOEU3OTVDMTFFNUEwN0VDRTIzQUIzRDBCQkQiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOmI0NmY1OGEyLTZiODEtMzU0OS1iZDM1LWM4NDRlYWU3MjI5OSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5YThhNjQ2Yi1iZTJkLTU3NGUtOWJlZi1hMGQ4NDdiODM3NDkiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4XHBEvAAAAuUlEQVR42pSSWxLDIAhFq2L6nunqs4r+dnVRadqCMJFam5+ckYtcATffH7v3B+fTkeh2vRAdpokIQiCKUCkC0T7GJhq8J/KV5JY1/CH6vc5KQSJE3EaVDoVYt+YWpm6uc47JiBq5KkOqZa6mdJ516mxJ+buXPtleBrtR/UHKueludQqep6D7V3VZchE7r5QoDvZezU1y2+nL2/R7jb7gvw767s0aozrZdtEl3gM1GcPLj43obt1TgAEADW11cCrFB8cAAAAASUVORK5CYII=) center repeat;">
+    {% include "graphic/logo.html" %}
+  	</div>
+    {% block content %}{% endblock %}
+
+    <footer class="footer">
+        {% if not summary_report %}
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        {% endif %}
+        <p><a href="http://www.polydata.com.cn">Polydata</a></p>
+    </footer>
+</div>
+<script>
+{% include "js/bootstrap.min.js" %}
+{% include "js/functions.js" %}
+</script>
+</body>
+</html>

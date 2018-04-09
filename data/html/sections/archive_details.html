@@ -1,0 +1,39 @@
+﻿<section id="details">
+    <div class="section-title logoback">
+        <h4>文件信息</h4>
+    </div>
+    <table class="table table-bordered" style="table-layout: fixed;">                
+            <tr>
+                <th  class="tableth" style="text-align: center; width: 15%;">文件名称</th>
+                <td  class="tabletd"><span  style="word-wrap: break-word;">{{results.targetdetail.target}}</span></td>
+            </tr>
+            <tr>
+                <th class="tableth" style="text-align: center; ">文件大小</th>
+                <td><span >{{results.targetdetail.size}} bytes</span></td>
+            </tr>
+            <tr>
+                <th class="tableth" style="text-align: center; ">类型</th>
+                <td  class="tabletd"><span >{{results.targetdetail.type}}</span></td>
+            </tr>
+            <tr>
+                <th class="tableth" style="text-align: center; ">后缀名是否匹配</th>
+                <td>
+                	<span  style="word-wrap: break-word;">
+                		{% if (results.targetdetail.extnomatch == 0) %}
+                			匹配
+                		{% else %}
+                			不匹配
+                		{% endif %}
+                	</span>
+                </td>
+            </tr>
+            <tr>
+                <th class="tableth" style="text-align: center; ">SHA1</th>
+                <td  class="tabletd"><span  style="word-wrap: break-word;">{{results.targetdetail.sha1}}</span></td>
+            </tr>
+            <tr>
+                <th class="tableth" style="text-align: center; ">MD5</th>
+                <td><span  style="word-wrap: break-word;">{{results.targetdetail.md5}}</span></td>
+            </tr>
+    </table>
+</section>

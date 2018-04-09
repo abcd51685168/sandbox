@@ -1,0 +1,50 @@
+﻿<section id="ainfo">
+    <div class="section-title">
+        <h4>信息</h4>
+    </div>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th class="tableth" style="text-align: center; ">分类</th>
+                <th class="tableth" style="text-align: center; ">开始时间</th>
+                <th class="tableth" style="text-align: center; ">完成时间</th>
+                <th class="tableth" style="text-align: center; ">持续时间</th>
+                <th class="tableth" style="text-align: center; ">评分</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="text-align: center; ">{{results.sandbox_result.info.category|upper}}</td>
+                <td style="text-align: center; ">{{results.sandbox_result.info.started}}</td>
+                <td style="text-align: center; ">{{results.sandbox_result.info.ended}}</td>
+                <td style="text-align: center; ">{{results.sandbox_result.info.duration}} 秒</td>
+                <td style="text-align: center; ">{{results.scores}}</td>      
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+{% if results.sandbox_result.info.machine and results.sandbox_result.info.machine.name %}
+    <section id="machine">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th class="tableth" style="text-align: center; ">虚拟机</th>
+                    <th class="tableth" style="text-align: center; ">标签</th>
+                    <th class="tableth" style="text-align: center; ">类型</th>
+                    <th class="tableth" style="text-align: center; ">开始时间</th>
+                    <th class="tableth" style="text-align: center; ">结束时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="text-align: center; ">{{results.sandbox_result.info.machine.name}}</td>
+                    <td style="text-align: center; ">{{results.sandbox_result.info.machine.label}}</td>
+                    <td style="text-align: center; ">{{results.sandbox_result.info.machine.manager}}</td>
+                    <td style="text-align: center; ">{{results.sandbox_result.info.machine.started_on}}</td>
+                    <td style="text-align: center; ">{{results.sandbox_result.info.machine.shutdown_on}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+{% endif %}
